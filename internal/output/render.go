@@ -28,11 +28,12 @@ func PrintTaskHuman(w io.Writer, task *taskfile.Task) error {
 	}
 	_, err := fmt.Fprintf(
 		w,
-		"%s\n  title: %s\n  status: %s\n  priority: %s\n  labels: %s\n  created: %s\n  updated: %s\n",
+		"%s\n  title: %s\n  status: %s\n  priority: %s\n  assignee: %s\n  labels: %s\n  created: %s\n  updated: %s\n",
 		task.ID,
 		task.Title,
 		task.Status,
 		task.Priority,
+		emptyFallback(task.Assignee, "unassigned"),
 		strings.Join(task.Labels, ", "),
 		task.CreatedAt.Format("2006-01-02 15:04:05 -07:00"),
 		task.UpdatedAt.Format("2006-01-02 15:04:05 -07:00"),
@@ -69,7 +70,11 @@ func PrintTasksHuman(w io.Writer, tasks []*taskfile.Task) error {
 		if len(task.Labels) > 0 {
 			labelSuffix = " {" + strings.Join(task.Labels, ", ") + "}"
 		}
-		if _, err := fmt.Fprintf(w, "  %s [%s] %s%s\n", task.ID, task.Priority, task.Title, labelSuffix); err != nil {
+		assigneeSuffix := ""
+		if strings.TrimSpace(task.Assignee) != "" {
+			assigneeSuffix = " @" + task.Assignee
+		}
+		if _, err := fmt.Fprintf(w, "  %s [%s] %s%s%s\n", task.ID, task.Priority, task.Title, assigneeSuffix, labelSuffix); err != nil {
 			return err
 		}
 	}
@@ -82,4 +87,11 @@ func indentBlock(value, prefix string) string {
 		lines[i] = prefix + line
 	}
 	return strings.Join(lines, "\n")
+}
+
+func emptyFallback(value, fallback string) string {
+	if strings.TrimSpace(value) == "" {
+		return fallback
+	}
+	return value
 }

@@ -10,6 +10,7 @@ import (
 
 func newAddCmd() *cobra.Command {
 	var priority string
+	var assignee string
 	var labels string
 	var notes string
 	var jsonOutput bool
@@ -26,6 +27,7 @@ func newAddCmd() *cobra.Command {
 			task, err := svc.Add(path, service.AddInput{
 				Title:    args[0],
 				Priority: priority,
+				Assignee: assignee,
 				Labels:   splitCSV(labels),
 				Notes:    notes,
 			})
@@ -39,6 +41,7 @@ func newAddCmd() *cobra.Command {
 		},
 	}
 	cmd.Flags().StringVar(&priority, "priority", "none", "Task priority")
+	cmd.Flags().StringVar(&assignee, "assignee", "", "Task assignee")
 	cmd.Flags().StringVar(&labels, "labels", "", "Comma-separated labels")
 	cmd.Flags().StringVar(&notes, "notes", "", "Task notes")
 	cmd.Flags().BoolVar(&jsonOutput, "json", false, "Print JSON output")

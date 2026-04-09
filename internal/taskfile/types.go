@@ -96,6 +96,7 @@ type Task struct {
 	Title     string    `json:"title"`
 	Status    Status    `json:"status"`
 	Priority  Priority  `json:"priority"`
+	Assignee  string    `json:"assignee"`
 	Labels    []string  `json:"labels"`
 	Notes     string    `json:"notes"`
 	CreatedAt time.Time `json:"created_at"`
@@ -217,4 +218,12 @@ func NormalizeLabels(labels []string) []string {
 		out = append(out, label)
 	}
 	return out
+}
+
+func NormalizeAssignee(value string) string {
+	fields := strings.Fields(value)
+	if len(fields) == 0 {
+		return ""
+	}
+	return strings.Join(fields, " ")
 }

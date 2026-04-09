@@ -14,6 +14,7 @@ func TestParseAndRenderRoundTrip(t *testing.T) {
 		Title:     "Initialize parser",
 		Status:    StatusTodo,
 		Priority:  PriorityP1,
+		Assignee:  "main-agent",
 		Labels:    []string{"cli", "v1"},
 		Notes:     "Create the Markdown parser and renderer.\n\n- preserve headings\n- preserve notes",
 		CreatedAt: timestamp,
@@ -30,7 +31,7 @@ func TestParseAndRenderRoundTrip(t *testing.T) {
 		t.Fatalf("expected 1 todo task, got %d", len(parsed.Todo))
 	}
 	got := parsed.Todo[0]
-	if got.ID != "T001" || got.Title != "Initialize parser" || got.Priority != PriorityP1 {
+	if got.ID != "T001" || got.Title != "Initialize parser" || got.Priority != PriorityP1 || got.Assignee != "main-agent" {
 		t.Fatalf("unexpected parsed task: %#v", got)
 	}
 	if got.Notes != doc.Todo[0].Notes {

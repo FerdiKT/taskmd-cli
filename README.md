@@ -103,14 +103,15 @@ This creates `docs/Task.md` in the repo root if you're inside a Git repository. 
 ### 2️⃣ Add your first tasks
 
 ```bash
-taskmd add "Initialize parser" --priority p1 --labels cli,v1
-taskmd add "Write README" --priority p2
+taskmd add "Initialize parser" --priority p1 --assignee main-agent --labels cli,v1
+taskmd add "Write README" --priority p2 --assignee docs-agent
 ```
 
 ### 3️⃣ See the queue
 
 ```bash
 taskmd list
+taskmd list --assignee main-agent
 taskmd next
 ```
 
@@ -127,8 +128,8 @@ taskmd reopen T001
 ```bash
 cat <<'JSON' | taskmd bulk add --file -
 [
-  {"title":"Ship binary", "priority":"p1", "labels":["release"]},
-  {"title":"Write docs", "priority":"p2"}
+  {"title":"Ship binary", "priority":"p1", "assignee":"release-agent", "labels":["release"]},
+  {"title":"Write docs", "priority":"p2", "assignee":"docs-agent"}
 ]
 JSON
 ```
@@ -166,8 +167,8 @@ taskmd next --json
 ### Write path
 
 ```bash
-taskmd add "Investigate flaky tests" --priority p1 --labels testing
-taskmd edit T004 --notes "Repro found on macOS only"
+taskmd add "Investigate flaky tests" --priority p1 --assignee qa-agent --labels testing
+taskmd edit T004 --assignee release-agent --notes "Repro found on macOS only"
 taskmd bulk edit --file ./patches/tasks.json
 ```
 
@@ -187,7 +188,7 @@ taskmd preview
 taskmd preview --port 4783
 ```
 
-This starts a local web server, opens your browser, and renders the current `docs/Task.md` in a human-readable board view.
+This starts a local web server, opens your browser, and renders the current `docs/Task.md` in a Jira-style preview with `List` and `Board` views. Search, assignee, and label filters are preserved in the URL, issue detail opens in a side drawer, and the page auto-refreshes every 30 seconds.
 
 ---
 
@@ -204,6 +205,7 @@ This starts a local web server, opens your browser, and renders the current `doc
 
 ### T001 - Initialize parser
 - priority: p1
+- assignee: main-agent
 - labels: cli, v1
 - created: 2026-04-09T14:30:00+03:00
 - updated: 2026-04-09T14:30:00+03:00
@@ -220,6 +222,7 @@ Rules:
 
 - IDs are stable and never renumbered.
 - Status is derived from the section, not duplicated in metadata.
+- `Assignee` is optional and can be cleared with an empty string patch.
 - `Notes` is optional and accepts raw Markdown.
 - `taskmd fmt` rewrites the file back into canonical form.
 
@@ -232,9 +235,9 @@ Bulk commands accept JSON arrays.
 ```bash
 cat <<'JSON' | taskmd bulk edit --file -
 [
-  {"id":"T001","notes":"Parser skeleton ready"},
+  {"id":"T001","assignee":"main-agent","notes":"Parser skeleton ready"},
   {"id":"T002","labels":[]},
-  {"id":"T003","priority":"p1"}
+  {"id":"T003","priority":"p1","assignee":""}
 ]
 JSON
 ```
@@ -242,7 +245,7 @@ JSON
 Patch semantics:
 
 - Missing fields are left unchanged.
-- `""` clears string fields such as `notes`.
+- `""` clears string fields such as `assignee` or `notes`.
 - `[]` clears labels.
 
 ---

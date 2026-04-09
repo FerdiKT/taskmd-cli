@@ -10,6 +10,7 @@ import (
 func newListCmd() *cobra.Command {
 	var statusValue string
 	var label string
+	var assignee string
 	var priorityValue string
 	var jsonOutput bool
 
@@ -21,7 +22,7 @@ func newListCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			filters := service.Filters{Label: label}
+			filters := service.Filters{Label: label, Assignee: assignee}
 			if cmd.Flags().Changed("status") {
 				status, err := taskfile.ParseStatus(statusValue)
 				if err != nil {
@@ -52,6 +53,7 @@ func newListCmd() *cobra.Command {
 
 	cmd.Flags().StringVar(&statusValue, "status", "", "Filter by status")
 	cmd.Flags().StringVar(&label, "label", "", "Filter by label")
+	cmd.Flags().StringVar(&assignee, "assignee", "", "Filter by assignee")
 	cmd.Flags().StringVar(&priorityValue, "priority", "", "Filter by priority")
 	cmd.Flags().BoolVar(&jsonOutput, "json", false, "Print JSON output")
 	return cmd

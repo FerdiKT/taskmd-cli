@@ -30,6 +30,11 @@ func renderSection(b *strings.Builder, status Status, tasks []*Task) {
 		b.WriteString("- priority: ")
 		b.WriteString(string(task.Priority))
 		b.WriteString("\n")
+		if strings.TrimSpace(task.Assignee) != "" {
+			b.WriteString("- assignee: ")
+			b.WriteString(task.Assignee)
+			b.WriteString("\n")
+		}
 		b.WriteString("- labels: ")
 		b.WriteString(strings.Join(task.Labels, ", "))
 		b.WriteString("\n")

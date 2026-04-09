@@ -141,6 +141,7 @@ func parseTaskBlock(lines []string, headingTitle string, status Status, startLin
 		Title:    title,
 		Status:   status,
 		Priority: PriorityNone,
+		Assignee: "",
 		Labels:   []string{},
 	}
 
@@ -190,6 +191,8 @@ func parseTaskBlock(lines []string, headingTitle string, status Status, startLin
 				return nil, &ParseError{Line: lineNo, Msg: err.Error()}
 			}
 			task.Priority = priority
+		case "assignee":
+			task.Assignee = NormalizeAssignee(value)
 		case "labels":
 			if value == "" {
 				task.Labels = []string{}

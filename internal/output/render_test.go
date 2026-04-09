@@ -15,6 +15,7 @@ func TestPrintTasksJSONContract(t *testing.T) {
 		Title:     "Write docs",
 		Status:    taskfile.StatusTodo,
 		Priority:  taskfile.PriorityP1,
+		Assignee:  "main-agent",
 		Labels:    []string{"docs"},
 		Notes:     "Hello",
 		CreatedAt: time.Date(2026, 4, 9, 14, 30, 0, 0, time.FixedZone("+03", 3*60*60)),
@@ -25,7 +26,7 @@ func TestPrintTasksJSONContract(t *testing.T) {
 		t.Fatal(err)
 	}
 	got := buf.String()
-	for _, fragment := range []string{`"id": "T001"`, `"status": "todo"`, `"priority": "p1"`} {
+	for _, fragment := range []string{`"id": "T001"`, `"status": "todo"`, `"priority": "p1"`, `"assignee": "main-agent"`} {
 		if !strings.Contains(got, fragment) {
 			t.Fatalf("expected JSON to contain %s, got %s", fragment, got)
 		}

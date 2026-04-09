@@ -9,6 +9,7 @@ import (
 func newEditCmd() *cobra.Command {
 	var title string
 	var priority string
+	var assignee string
 	var labels string
 	var notes string
 	var jsonOutput bool
@@ -28,6 +29,9 @@ func newEditCmd() *cobra.Command {
 			}
 			if cmd.Flags().Changed("priority") {
 				patch.Priority = &priority
+			}
+			if cmd.Flags().Changed("assignee") {
+				patch.Assignee = &assignee
 			}
 			if cmd.Flags().Changed("labels") {
 				parsed := splitCSV(labels)
@@ -49,6 +53,7 @@ func newEditCmd() *cobra.Command {
 
 	cmd.Flags().StringVar(&title, "title", "", "Task title")
 	cmd.Flags().StringVar(&priority, "priority", "", "Task priority")
+	cmd.Flags().StringVar(&assignee, "assignee", "", "Task assignee; pass empty string to clear")
 	cmd.Flags().StringVar(&labels, "labels", "", "Comma-separated labels; pass empty string to clear")
 	cmd.Flags().StringVar(&notes, "notes", "", "Task notes; pass empty string to clear")
 	cmd.Flags().BoolVar(&jsonOutput, "json", false, "Print JSON output")

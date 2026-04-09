@@ -21,6 +21,7 @@ type Filters struct {
 	Status      taskfile.Status
 	HasStatus   bool
 	Label       string
+	Assignee    string
 	Priority    taskfile.Priority
 	HasPriority bool
 }
@@ -28,6 +29,7 @@ type Filters struct {
 type AddInput struct {
 	Title    string   `json:"title"`
 	Priority string   `json:"priority,omitempty"`
+	Assignee string   `json:"assignee,omitempty"`
 	Labels   []string `json:"labels,omitempty"`
 	Notes    string   `json:"notes,omitempty"`
 }
@@ -37,6 +39,7 @@ type EditInput struct {
 	Title    *string   `json:"title,omitempty"`
 	Status   *string   `json:"status,omitempty"`
 	Priority *string   `json:"priority,omitempty"`
+	Assignee *string   `json:"assignee,omitempty"`
 	Labels   *[]string `json:"labels,omitempty"`
 	Notes    *string   `json:"notes,omitempty"`
 }
@@ -87,6 +90,9 @@ func (s *Service) List(path string, filters Filters) ([]*taskfile.Task, error) {
 		if filters.Label != "" && !slices.Contains(task.Labels, strings.ToLower(filters.Label)) {
 			continue
 		}
+		if filters.Assignee != "" && !strings.EqualFold(task.Assignee, filters.Assignee) {
+			continue
+		}
 		out = append(out, task)
 	}
 	return out, nil
@@ -126,6 +132,7 @@ func (s *Service) Add(path string, input AddInput) (*taskfile.Task, error) {
 			Title:     title,
 			Status:    taskfile.StatusTodo,
 			Priority:  priority,
+			Assignee:  taskfile.NormalizeAssignee(input.Assignee),
 			Labels:    taskfile.NormalizeLabels(input.Labels),
 			Notes:     strings.TrimSpace(input.Notes),
 			CreatedAt: ts,
@@ -160,6 +167,9 @@ func (s *Service) Edit(path string, patch EditInput) (*taskfile.Task, error) {
 				return err
 			}
 			task.Priority = priority
+		}
+		if patch.Assignee != nil {
+			task.Assignee = taskfile.NormalizeAssignee(*patch.Assignee)
 		}
 		if patch.Labels != nil {
 			task.Labels = taskfile.NormalizeLabels(*patch.Labels)
@@ -248,6 +258,7 @@ func (s *Service) BulkAdd(path string, inputs []AddInput) error {
 				Title:     title,
 				Status:    taskfile.StatusTodo,
 				Priority:  priority,
+				Assignee:  taskfile.NormalizeAssignee(input.Assignee),
 				Labels:    taskfile.NormalizeLabels(input.Labels),
 				Notes:     strings.TrimSpace(input.Notes),
 				CreatedAt: now,
@@ -279,6 +290,9 @@ func (s *Service) BulkEdit(path string, patches []EditInput) error {
 					return err
 				}
 				task.Priority = priority
+			}
+			if patch.Assignee != nil {
+				task.Assignee = taskfile.NormalizeAssignee(*patch.Assignee)
 			}
 			if patch.Labels != nil {
 				task.Labels = taskfile.NormalizeLabels(*patch.Labels)

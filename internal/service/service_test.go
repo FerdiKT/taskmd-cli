@@ -23,11 +23,11 @@ func TestServiceLifecycleAndNext(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	first, err := svc.Add(path, AddInput{Title: "Write parser", Priority: "p2", Labels: []string{"cli"}})
+	first, err := svc.Add(path, AddInput{Title: "Write parser", Priority: "p2", Assignee: "main-agent", Labels: []string{"cli"}})
 	if err != nil {
 		t.Fatal(err)
 	}
-	second, err := svc.Add(path, AddInput{Title: "Ship README", Priority: "p1"})
+	second, err := svc.Add(path, AddInput{Title: "Ship README", Priority: "p1", Assignee: "docs-agent"})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -42,17 +42,27 @@ func TestServiceLifecycleAndNext(t *testing.T) {
 
 	newNotes := "Parser skeleton"
 	newLabels := []string{}
+	newAssignee := "ui-agent"
 	edited, err := svc.Edit(path, EditInput{
 		ID:       first.ID,
 		Notes:    &newNotes,
+		Assignee: &newAssignee,
 		Labels:   &newLabels,
 		Priority: stringPtr("p1"),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if edited.Priority != taskfile.PriorityP1 || edited.Notes != "Parser skeleton" || len(edited.Labels) != 0 {
+	if edited.Priority != taskfile.PriorityP1 || edited.Assignee != "ui-agent" || edited.Notes != "Parser skeleton" || len(edited.Labels) != 0 {
 		t.Fatalf("unexpected edited task: %#v", edited)
+	}
+
+	filtered, err := svc.List(path, Filters{Assignee: "docs-agent"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(filtered) != 1 || filtered[0].ID != second.ID {
+		t.Fatalf("expected assignee filter to match %s, got %#v", second.ID, filtered)
 	}
 
 	if err := svc.SetStatus(path, taskfile.StatusInProgress, []string{first.ID}); err != nil {
@@ -91,8 +101,8 @@ func TestBulkAndConcurrentWrites(t *testing.T) {
 	}
 
 	if err := svc.BulkAdd(path, []AddInput{
-		{Title: "A", Priority: "p3"},
-		{Title: "B", Priority: "p1"},
+		{Title: "A", Priority: "p3", Assignee: "main-agent"},
+		{Title: "B", Priority: "p1", Assignee: "release-agent"},
 	}); err != nil {
 		t.Fatal(err)
 	}
@@ -107,6 +117,9 @@ func TestBulkAndConcurrentWrites(t *testing.T) {
 	}
 	if len(doc.Todo) != 2 {
 		t.Fatalf("expected 2 tasks after bulk add, got %d", len(doc.Todo))
+	}
+	if doc.Todo[0].Assignee == "" || doc.Todo[1].Assignee == "" {
+		t.Fatalf("expected assignees to round-trip in bulk add, got %#v", doc.Todo)
 	}
 
 	var wg sync.WaitGroup
