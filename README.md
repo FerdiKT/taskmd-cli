@@ -18,6 +18,10 @@
   <a href="#-license"><img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="License" /></a>
 </p>
 
+<p align="center">
+  <img src="assets/task-board-preview.png" alt="taskmd preview board" width="1100" />
+</p>
+
 ---
 
 ## ⚠️ Status
