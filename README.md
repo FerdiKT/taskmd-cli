@@ -144,6 +144,7 @@ JSON
 | `core` | `init` · `list` · `show` · `version` | Project bootstrap and inspection |
 | `lifecycle` | `add` · `edit` · `start` · `done` · `reopen` · `remove` | Stable IDs and explicit status changes |
 | `bulk` | `bulk add` · `bulk edit` · `bulk remove` | JSON array input from file or stdin |
+| `preview` | `preview` | Local web UI for the live Task.md state |
 | `maintenance` | `next` · `fmt` · `validate` | Deterministic prioritization and file normalization |
 
 > **Full reference:** `taskmd --help` · `taskmd <command> --help`
@@ -178,6 +179,15 @@ taskmd validate
 ```
 
 The canonical file format is strict enough for safe machine updates, but still readable enough for manual editing.
+
+### Preview path
+
+```bash
+taskmd preview
+taskmd preview --port 4783
+```
+
+This starts a local web server, opens your browser, and renders the current `docs/Task.md` in a human-readable board view.
 
 ---
 
@@ -265,4 +275,3 @@ make dist VERSION=0.1.0
 ## 📄 License
 
 MIT
-

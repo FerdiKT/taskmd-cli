@@ -104,6 +104,10 @@ func (s *Service) Show(path, id string) (*taskfile.Task, error) {
 	return task, nil
 }
 
+func (s *Service) Document(path string) (*taskfile.Document, error) {
+	return s.store.Load(path)
+}
+
 func (s *Service) Add(path string, input AddInput) (*taskfile.Task, error) {
 	var created *taskfile.Task
 	err := s.store.Rewrite(path, func(doc *taskfile.Document) error {
