@@ -4,16 +4,6 @@
 
 ## Todo
 
-### T006 - Verify Homebrew upgrade installs the new preview build
-- priority: p1
-- assignee: qa-agent
-- labels: brew, qa
-- created: 2026-04-09T16:54:17+03:00
-- updated: 2026-04-09T16:54:17+03:00
-
-#### Notes
-Install or upgrade from the tap on a clean environment and confirm List, Board, assignee, and filter behavior are included.
-
 ## In Progress
 
 ### T008 - Keep this repo's roadmap current in docs/Task.md
@@ -25,16 +15,6 @@ Install or upgrade from the tap on a clean environment and confirm List, Board, 
 
 #### Notes
 Use taskmd as the project's live tracker and keep active work aligned with real implementation steps.
-
-### T005 - Cut v0.2.0 release with preview filters and assignee support
-- priority: p1
-- assignee: release-agent
-- labels: release, brew
-- created: 2026-04-09T16:54:17+03:00
-- updated: 2026-04-09T17:07:31+03:00
-
-#### Notes
-Tag and publish the next release once the preview UI, assignee support, and docs are stable.
 
 ## Done
 
@@ -87,3 +67,23 @@ Make List and Board views preserve filter state while searching issues and narro
 
 #### Notes
 Open richer task details from the List or Board view without leaving the page.
+
+### T005 - Cut v0.2.0 release with preview filters and assignee support
+- priority: p1
+- assignee: release-agent
+- labels: release, brew
+- created: 2026-04-09T16:54:17+03:00
+- updated: 2026-04-09T17:11:20+03:00
+
+#### Notes
+Published v0.2.0 with the Jira-style List and Board preview, working filters, assignee support, and issue detail drawer.
+
+### T006 - Verify Homebrew upgrade installs the new preview build
+- priority: p1
+- assignee: qa-agent
+- labels: brew, qa
+- created: 2026-04-09T16:54:17+03:00
+- updated: 2026-04-09T17:11:20+03:00
+
+#### Notes
+Updated the tap, ran brew upgrade taskmd locally, and verified the installed binary reports v0.2.0 with assignee-aware CLI flags.
