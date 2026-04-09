@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0f1729"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="900" cy="200" r="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="210" cy="300" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="termBg" x1="660" y1="60" x2="660" y2="365" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a1f2e"/>
+      <stop offset="100%" stop-color="#151925"/>
+    </linearGradient>
+    <linearGradient id="termBorder" x1="660" y1="60" x2="660" y2="365" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2d3548"/>
+      <stop offset="100%" stop-color="#1e2433"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.02" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <rect width="1200" height="400" fill="url(#grid)"/>
+  <rect width="1200" height="400" fill="url(#glow1)"/>
+  <rect width="1200" height="400" fill="url(#glow2)"/>
+
+  <circle cx="100" cy="80" r="1.5" fill="#22c55e" opacity="0.3"/>
+  <circle cx="180" cy="50" r="1" fill="#38bdf8" opacity="0.25"/>
+  <circle cx="1100" cy="350" r="1.5" fill="#22c55e" opacity="0.2"/>
+  <circle cx="1050" cy="60" r="1" fill="#86efac" opacity="0.15"/>
+  <circle cx="50" cy="320" r="1" fill="#67e8f9" opacity="0.2"/>
+
+  <g transform="translate(80, 110)">
+    <rect x="0" y="0" width="52" height="52" rx="12" fill="#22c55e" opacity="0.12"/>
+    <text x="26" y="35" font-family="SF Mono, Menlo, Consolas, monospace" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="600">[]</text>
+
+    <text x="66" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="36" fill="#f8fafc" font-weight="700" letter-spacing="-0.5">taskmd</text>
+    <text x="66" y="46" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#64748b" font-weight="500" letter-spacing="3">CLI</text>
+  </g>
+
+  <text x="80" y="210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#94a3b8" font-weight="400">
+    Project-local task tracking from your terminal.
+  </text>
+  <text x="80" y="236" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#94a3b8" font-weight="400">
+    Markdown-native. Agent-friendly. JSON-first.
+  </text>
+
+  <g transform="translate(80, 268)">
+    <rect x="0" y="0" width="110" height="28" rx="14" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="55" y="18" font-family="SF Mono, Menlo, monospace" font-size="11" fill="#4ade80" text-anchor="middle" font-weight="500">docs/Task.md</text>
+    <rect x="120" y="0" width="96" height="28" rx="14" fill="#38bdf8" opacity="0.1" stroke="#38bdf8" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="168" y="18" font-family="SF Mono, Menlo, monospace" font-size="11" fill="#67e8f9" text-anchor="middle" font-weight="500">bulk edit</text>
+    <rect x="226" y="0" width="108" height="28" rx="14" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="280" y="18" font-family="SF Mono, Menlo, monospace" font-size="11" fill="#fbbf24" text-anchor="middle" font-weight="500">--json</text>
+  </g>
+
+  <line x1="80" y1="320" x2="440" y2="320" stroke="#1e293b" stroke-width="1"/>
+  <text x="80" y="348" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#475569">github.com/ferdikt/taskmd-cli</text>
+
+  <g transform="translate(500, 40)">
+    <rect x="0" y="0" width="640" height="345" rx="12" fill="url(#termBorder)"/>
+    <rect x="1" y="1" width="638" height="343" rx="11" fill="url(#termBg)"/>
+    <rect x="1" y="1" width="638" height="36" rx="11" fill="#1e2433"/>
+    <rect x="1" y="26" width="638" height="11" fill="#1e2433"/>
+    <circle cx="22" cy="19" r="6" fill="#ff5f57"/>
+    <circle cx="42" cy="19" r="6" fill="#febc2e"/>
+    <circle cx="62" cy="19" r="6" fill="#28c840"/>
+    <text x="320" y="23" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12" fill="#64748b" text-anchor="middle">taskmd — zsh</text>
+    <line x1="1" y1="37" x2="639" y2="37" stroke="#2d3548" stroke-width="0.5"/>
+
+    <g transform="translate(24, 58)">
+      <text y="0" font-family="SF Mono, Menlo, Consolas, monospace" font-size="13">
+        <tspan fill="#6b7280">$</tspan>
+        <tspan fill="#e2e8f0"> taskmd list </tspan>
+        <tspan fill="#fbbf24">--json</tspan>
+      </text>
+
+      <text y="28" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5" fill="#94a3b8">[</text>
+      <text y="46" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#94a3b8">  { "</tspan><tspan fill="#7dd3fc">id</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#a7f3d0">T001</tspan><tspan fill="#94a3b8">", "</tspan><tspan fill="#7dd3fc">title</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#a5b4fc">Initialize parser</tspan><tspan fill="#94a3b8">",</tspan></text>
+      <text y="64" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#94a3b8">    "</tspan><tspan fill="#7dd3fc">status</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#34d399">todo</tspan><tspan fill="#94a3b8">", "</tspan><tspan fill="#7dd3fc">priority</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#fbbf24">p1</tspan><tspan fill="#94a3b8">" },</tspan></text>
+      <text y="82" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#94a3b8">  { "</tspan><tspan fill="#7dd3fc">id</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#a7f3d0">T002</tspan><tspan fill="#94a3b8">", "</tspan><tspan fill="#7dd3fc">title</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#a5b4fc">Ship README</tspan><tspan fill="#94a3b8">",</tspan></text>
+      <text y="100" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5" xml:space="preserve"><tspan fill="#94a3b8">    "</tspan><tspan fill="#7dd3fc">status</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#34d399">todo</tspan><tspan fill="#94a3b8">", "</tspan><tspan fill="#7dd3fc">priority</tspan><tspan fill="#94a3b8">": "</tspan><tspan fill="#fbbf24">p2</tspan><tspan fill="#94a3b8">" }</tspan></text>
+      <text y="118" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5" fill="#94a3b8">]</text>
+
+      <text y="154" font-family="SF Mono, Menlo, Consolas, monospace" font-size="13">
+        <tspan fill="#6b7280">$</tspan>
+        <tspan fill="#e2e8f0"> taskmd next</tspan>
+      </text>
+      <text y="178" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5">
+        <tspan fill="#34d399">T001</tspan>
+        <tspan fill="#94a3b8"> [p1] Initialize parser</tspan>
+      </text>
+
+      <text y="214" font-family="SF Mono, Menlo, Consolas, monospace" font-size="13">
+        <tspan fill="#6b7280">$</tspan>
+        <tspan fill="#e2e8f0"> taskmd bulk edit </tspan>
+        <tspan fill="#fbbf24">--file -</tspan>
+      </text>
+      <text y="238" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5">
+        <tspan fill="#34d399">Edited 2 task(s)</tspan>
+      </text>
+      <text y="262" font-family="SF Mono, Menlo, Consolas, monospace" font-size="12.5">
+        <tspan fill="#34d399">Validated docs/Task.md</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
